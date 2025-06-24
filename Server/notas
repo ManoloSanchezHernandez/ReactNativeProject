@@ -1,0 +1,7 @@
+//version antigua
+npm i mysql
+//version nueva
+npm i mysql2
+
+//este comando se usa para verficar todas las dependencias que tenemos instaladas, y si se puede actualizar algunas de ellas 
+npx expo  install --check   
