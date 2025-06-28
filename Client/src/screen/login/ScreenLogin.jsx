@@ -2,11 +2,8 @@ import { Alert, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { Button, TextInput, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { login } from '../../context/StateLogin'; // Importa la función de login desde el contexto
 import { estadoLoginGlobal } from '../../context/contextData'; // Importa el contexto de login
 import { useContext } from 'react'; // Importa useContext para acceder al contexto
-
-
 
 export default function ScreenLogin() {
     const rutas = useNavigation();
@@ -14,11 +11,12 @@ export default function ScreenLogin() {
     const [password, setPassword] = useState('');
     const [verpw, setverpw] = useState(true);
     const { login } = useContext(estadoLoginGlobal); // Obtén la función de login del contexto  
+    const IP = process.env.EXPO_PUBLIC_IP;
 
     const handlogin = async () => {
         if (email.trim() === '' || password.trim() === '') {
             alert('Por favor, completa todos los campos.');
-            
+
             return;
 
         } else {
@@ -38,10 +36,10 @@ export default function ScreenLogin() {
             };
 
             try {
-                const response = await fetch("http://172.168.15.1:4000/api/usuario/login", requestOptions);
+                const response = await fetch(`http://${IP}:4000/api/usuarios/login`, requestOptions);
                 const result = await response.json();
                 if (result.body.status === true) {
-                    alert('Bienvenido ' + result.body.user.nombre); 
+                    alert('Bienvenido ' + result.body.user.nombre);
                     login();
 
                 } else {

@@ -1,92 +1,120 @@
-import { StyleSheet, View } from 'react-native';
 import React, { useContext } from 'react';
-import { Card, Text, Button, Icon } from 'react-native-paper';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Card, Text, Button, Icon, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { estadoGlobal } from '../../context/contextData';
-import { estadoLoginGlobal } from '../../context/contextData';
+import { estadoGlobal, estadoLoginGlobal } from '../../context/contextData';
 
-
-export default function ScreenHome() {
-
-  const rutas = useNavigation();
-
-  const { sumar, restar, contador } = useContext(estadoGlobal)
-  console.log(contador);
-  const { logout, isLogin } = useContext(estadoLoginGlobal);
-  console.log('Estado de login:', isLogin); // debería cambiar de true a false
+function CardControl({ icon, title, navigateTo }) {
+  const theme = useTheme();
+  const navigation = useNavigation();
 
   return (
-    <View style={styles.body}>
-      <Text style={styles.title}>ScreenHome</Text>
-      <Card style={styles.cards}>
-        <Icon
-          source="lightbulb"
-          color={'purple'}
-          size={70}
-        />
-        <Button icon="arrow-right-thin" mode="contained" onPress={() => rutas.push('lucescasa')}>
-          Ver luces
+    <Card style={styles.card}>
+      <Card.Content style={styles.cardContent}>
+        <Icon source={icon} size={50} color={theme.colors.primary} />
+        <Button 
+          mode="contained-tonal"
+          icon={icon}
+          style={styles.button}
+          contentStyle={{ flexDirection: 'row-reverse' }}
+          onPress={() => navigation.navigate(navigateTo)}
+        >
+          {title}
         </Button>
+      </Card.Content>
+    </Card>
+  );
+}
+
+export default function ScreenHome() {
+  const theme = useTheme();
+  const { sumar, restar, contador } = useContext(estadoGlobal);
+  const { logout, isLogin } = useContext(estadoLoginGlobal);
+
+  return (
+    <ScrollView contentContainerStyle={[styles.body, { backgroundColor: theme.colors.background }]}>
+      <Text style={[styles.title, { color: theme.colors.primary }]}>Control del Hogar</Text>
+
+      <CardControl icon="lightbulb-on" title="Control de Luces" navigateTo="lucescasa" />
+      <CardControl icon="door" title="Control de Puertas" navigateTo="puertascasa" />
+      <CardControl icon="account" title="Control del Usuarios" navigateTo="perfil" />
+
+      <Card style={[styles.card, styles.counterCard]}>
+        <Card.Content>
+          <Text style={styles.counterText}>
+            Contador: <Text style={{ fontWeight: 'bold' }}>{contador}</Text>
+          </Text>
+          <View style={styles.counterActions}>
+            <Button mode="outlined" icon="plus" onPress={sumar} style={styles.counterButton}>
+              Sumar
+            </Button>
+            <Button mode="outlined" icon="minus" onPress={restar} style={styles.counterButton}>
+              Restar
+            </Button>
+          </View>
+        </Card.Content>
       </Card>
 
-      <Card style={styles.cards}>
-        <Icon
-          source="door"
-          color={'purple'}
-          size={70}
-        />
-        <Button icon="arrow-right-thin" mode="contained" onPress={() => rutas.push('puertascasa')}>
-          ver puertas
+      {isLogin && (
+        <Button
+          mode="contained"
+          icon="logout"
+          onPress={logout}
+          style={styles.logoutButton}
+          buttonColor={theme.colors.error}
+        >
+          Cerrar Sesión
         </Button>
-      </Card>
-
-      <Card style={styles.cards}>
-        <Icon
-          source="details"
-          color={'purple'}
-          size={70}
-        />
-
-        <Button icon="arrow-right-thin" mode="contained">
-          Press me
-        </Button>
-      </Card>
-
-      <Button
-        onPress={() => logout()}
-        mode="contained"
-        icon="logout"
-        style={{ marginTop: 20, backgroundColor: 'red' }}
-      >
-        Cerrar Sesión
-      </Button>
-
-      <Card style={{ padding: 20, marginTop: 20 }}>
-        <Text> Suma total: {contador}</Text>
-        <Button onPress={() => sumar()}>Sumar</Button>
-        <Button onPress={() => restar()}>Restar</Button>
-      </Card>
-    </View>
-
+      )}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   body: {
-    justifyContent: 'center',
-    padding: 40,
+    flexGrow: 1,
+    paddingHorizontal: 16,
+    paddingBottom: 32,
   },
   title: {
-    color: 'rgb(255, 0, 0)',
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 30,
+    marginVertical: 24,
   },
-  cards: {
+  card: {
+    marginBottom: 16,
+    borderRadius: 12,
+    elevation: 4,
+  },
+  cardContent: {
+    alignItems: 'center',
     padding: 20,
-    marginTop: 10,
-    borderRadius: 10,
-    borderColor: 'rgb(84, 0, 76)'
+  },
+  counterCard: {
+    marginTop: 24,
+    padding: 16,
+  },
+  button: {
+    marginTop: 12,
+    borderRadius: 8,
+    width: '100%',
+  },
+  counterText: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 12,
+  },
+  counterActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  counterButton: {
+    flex: 1,
+    marginHorizontal: 4,
+  },
+  logoutButton: {
+    marginTop: 24,
+    borderRadius: 8,
   },
 });

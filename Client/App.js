@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Navegacion from './Navegacion';
 import StateGlobal from './src/context/StateGlobal';
 import StateLogin from './src/context/StateLogin';
+import StateDevices from './src/context/StateDevices';
 import { createContext } from 'react';
 
 
@@ -16,13 +17,15 @@ export const estadoLoginGlobal = createContext();
 
 export default function App() {
   return (
-    <StateLogin>
-      <StateGlobal>
-        <NavigationContainer>
-          <Navegacion />
-        </NavigationContainer>
-      </StateGlobal>
+    <StateDevices>
+          <StateLogin>
+        <StateGlobal>
+          <NavigationContainer>
+            <Navegacion />
+          </NavigationContainer>
+        </StateGlobal>
     </StateLogin>
+    </StateDevices>
   );
 }
 

@@ -7,13 +7,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
+//importamos los iconos que vamos a usar
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
 //llamar a los screen principales
-import ScreenAbout from "./src/screen/about/ScreenAbout";
+import ScreenNotificaciones from "./src/screen/Notificaciones/ScreenNotificaciones";
 import ScreenHome from "./src/screen/home/ScreenHome";
 import ScreenSetting from "./src/screen/setting/ScreenSetting";
+import ScreenUser from "./src/screen/Users/ScreenUser";
 
 //llamara a hijos de Home
 import LucesCasa from "./src/screen/home/LucesCasa";
@@ -38,6 +41,7 @@ function MyStackHome() {
             <Stack.Screen name="lucescasa" component={LucesCasa} />
             <Stack.Screen name="puertascasa" component={PuertasCasa} />
             <Stack.Screen name="detallescasa" component={DetallesHome} />
+            <Stack.Screen name="perfil" component={ScreenUser} />
         </Stack.Navigator>
     )
 }
@@ -57,19 +61,19 @@ function MyDrawer() {
     return (
         <Drawer.Navigator>
             <Drawer.Screen name="Menu" component={MyStackHome} options={{
-                title: 'Dahsboard', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="heart" size={size} color={color} />
+                title: 'Dahsboard', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="dashboard" size={size} color={color} />
                 )
             }} />
-            <Drawer.Screen name="notificaciones" component={MyStackHome} options={{
-                title: 'Notificaciones', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="heart" size={size} color={color} />
+            <Drawer.Screen name="notificaciones" component={ScreenNotificaciones} options={{
+                title: 'Notificaciones', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="comment" size={size} color={color} />
                 )
             }} />
-            <Drawer.Screen name="perfil" component={MyStackHome} options={{
-                title: 'Perfil', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="heart" size={size} color={color} />
+            <Drawer.Screen name="perfil" component={ScreenUser} options={{
+                title: 'Perfil', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="user" size={size} color={color} />
                 )
             }} />
-            <Drawer.Screen name="setting" component={MyStackHome} options={{
-                title: 'Configuraciones', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="heart" size={size} color={color} />
+            <Drawer.Screen name="setting" component={ScreenSetting} options={{
+                title: 'Configuraciones', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<AntDesign name="setting" size={size} color={color} />
                 )
             }} />
         </Drawer.Navigator>
@@ -122,8 +126,8 @@ function MyTabs() {
             />
 
             <Tab.Screen
-                name="about"
-                component={ScreenAbout}
+                name="Notificaciones"
+                component={ScreenNotificaciones}
                 options={{
                     title: 'About',
                     headerShown: true,

@@ -10,6 +10,7 @@ export default function ScreenCreate() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { login } = useContext(estadoLoginGlobal);
+    const IP = process.env.EXPO_PUBLIC_IP; // Asegúrate de que esta variable esté definida en tu entorno 
 
     const handleCreateAccount = async () => {
         if (!name.trim() || !email.trim() || !password.trim()) {
@@ -32,7 +33,7 @@ export default function ScreenCreate() {
         };
 
         try {
-            const response = await fetch("http://172.168.15.1:4000/api/usuario/agregar", requestOptions);
+            const response = await fetch(`http://${IP}:4000/api/usuarios/agregar`, requestOptions);
             const result = await response.json();
 
             if (result?.body?.status === true) {

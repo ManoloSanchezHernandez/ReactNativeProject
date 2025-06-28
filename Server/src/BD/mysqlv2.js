@@ -16,6 +16,7 @@ async function conMysql() {
     try {
         conexion = await mysql.createConnection(dbconfig);
         console.log('BD conectada');
+        console.log('Configuración de conexión:', dbconfig);
 
         // Manejo de errores de conexión
         conexion.on('error', async (err) => {
@@ -61,9 +62,9 @@ async function actualizar(tabla, data) {
     return result;
 }
 
+// Función para agregar o actualizar un registro (probablemente para usuarios)
 async function agregar(tabla, data) {
     const id = parseInt(data.id);
-
     if (id === 0) {
         try {
             console.log('Validando email:', data.email);
@@ -90,9 +91,152 @@ async function agregar(tabla, data) {
     }
 }
 
+// Función para agregar o actualizar luces
+async function agregarLuces(tabla, data) {
+    const id = parseInt(data.id);
 
-async function eliminar(tabla, id) {
-    const [result] = await conexion.query(`DELETE FROM ${tabla} WHERE id = ?`, [id]);
+    if (id === 0) {
+        try {
+            console.log('Validando existencia de la luz:', data.name);
+            const [rows] = await conexion.query(`SELECT * FROM ${tabla} WHERE name = ?`, [data.name]);
+
+            if (rows.length > 0) {
+                console.log('Luz ya registrada');
+                return {
+                    status: false,
+                    mensaje: 'La luz ya está registrada con anterioridad'
+                };
+            }
+
+            // Validar datos requeridos
+            if (!data.name || data.status === undefined) {
+                return {
+                    status: false,
+                    mensaje: 'Datos incompletos. Se requieren name y status'
+                };
+            }
+
+            const result = await insertar(tabla, data);
+            return {
+                status: true,
+                resultado: result,
+                mensaje: 'Luz registrada exitosamente'
+            };
+
+        } catch (error) {
+            console.error('Error al insertar luz:', error);
+            return {
+                status: false,
+                mensaje: 'Error al insertar el registro',
+                error: error.message
+            };
+        }
+    } else {
+        try {
+            // Validar que la luz exista antes de actualizar
+            const [existing] = await conexion.query(
+                `SELECT * FROM ${tabla} WHERE id = ?`,
+                [id]
+            );
+
+            if (existing.length === 0) {
+                return {
+                    status: false,
+                    mensaje: 'La luz no existe en la base de datos'
+                };
+            }
+
+            const result = await actualizar(tabla, data);
+            return {
+                status: true,
+                resultado: result,
+                mensaje: 'Luz actualizada exitosamente'
+            };
+        } catch (error) {
+            console.error('Error al actualizar luz:', error);
+            return {
+                status: false,
+                mensaje: 'Error al actualizar el registro',
+                error: error.message
+            };
+        }
+    }
+}
+
+// Función para agregar o actualizar puertas
+async function agregarPuertas(tabla, data) {
+    const id = parseInt(data.id);
+
+    if (id === 0) {
+        try {
+            console.log('Validando existencia de la puerta:', data.name);
+            const [rows] = await conexion.query(`SELECT * FROM ${tabla} WHERE name = ?`, [data.name]);
+
+            if (rows.length > 0) {
+                console.log('Puerta ya registrada');
+                return {
+                    status: false,
+                    mensaje: 'La puerta ya está registrada con anterioridad'
+                };
+            }
+
+            // Validar datos requeridos
+            if (!data.name || data.status === undefined) {
+                return {
+                    status: false,
+                    mensaje: 'Datos incompletos. Se requieren name y status'
+                };
+            }
+
+            const result = await insertar(tabla, data);
+            return {
+                status: true,
+                resultado: result,
+                mensaje: 'Puerta registrada exitosamente'
+            };
+
+        } catch (error) {
+            console.error('Error al insertar puerta:', error);
+            return {
+                status: false,
+                mensaje: 'Error al insertar el registro',
+                error: error.message
+            };
+        }
+    } else {
+        try {
+            // Validar que la puerta exista antes de actualizar
+            const [existing] = await conexion.query(
+                `SELECT * FROM ${tabla} WHERE id = ?`,
+                [id]
+            );
+
+            if (existing.length === 0) {
+                return {
+                    status: false,
+                    mensaje: 'La puerta no existe en la base de datos'
+                };
+            }
+
+            const result = await actualizar(tabla, data);
+            return {
+                status: true,
+                resultado: result,
+                mensaje: 'Puerta actualizada exitosamente'
+            };
+        } catch (error) {
+            console.error('Error al actualizar puerta:', error);
+            return {
+                status: false,
+                mensaje: 'Error al actualizar el registro',
+                error: error.message
+            };
+        }
+    }
+}
+
+async function eliminar(tabla, data) {
+    const [result] = await conexion.query(`DELETE FROM ?? WHERE id = ?`, [tabla, data.id]);
     return result;
 }
 
@@ -123,5 +267,14 @@ async function login(tabla, data) {
     }
 }
 
-
-module.exports = { uno, todos, agregar, eliminar, login };
+module.exports = {
+    uno,
+    todos,
+    agregar,
+    eliminar,
+    login,
+    agregarLuces,
+    agregarPuertas,
+    insertar,
+    actualizar
+};

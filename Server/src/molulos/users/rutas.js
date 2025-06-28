@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const respuesta = require('../../red/respuestas')
-const controlador = require('./controlador');
+const controlador = require('./controladorUsers');
 
 router.get('/', async function (req, res) {
   try {
