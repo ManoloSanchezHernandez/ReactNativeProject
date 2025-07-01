@@ -38,7 +38,7 @@ export default function Users() {
   const cambiarEstadoUsuario = async (id, estadoActual) => {
     try {
       const nuevoEstado = estadoActual ? 0 : 1;
-      const res = await fetch(`http://${IP}:4000/api/usuarios/${id}`, {
+      const res = await fetch(`${IP}:4000/api/usuarios/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nuevoEstado }),

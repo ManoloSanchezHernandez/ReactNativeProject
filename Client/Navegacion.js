@@ -17,6 +17,7 @@ import ScreenNotificaciones from "./src/screen/Notificaciones/ScreenNotificacion
 import ScreenHome from "./src/screen/home/ScreenHome";
 import ScreenSetting from "./src/screen/setting/ScreenSetting";
 import ScreenUser from "./src/screen/Users/ScreenUser";
+import ScreenUsuarios from "./src/screen/Usuarios/ScreenUsuarios";
 
 //llamara a hijos de Home
 import LucesCasa from "./src/screen/home/LucesCasa";
@@ -27,6 +28,7 @@ import DetallesHome from "./src/screen/home/DetallesHome";
 import ScreenLogin from "./src/screen/login/ScreenLogin";
 import ScreenCreate from "./src/screen/login/ScreenCreate";
 import { estadoLoginGlobal } from "./src/context/contextData";
+
 
 // declaramos las variables para el uso del nevegacion 
 const Tab = createBottomTabNavigator();
@@ -42,6 +44,7 @@ function MyStackHome() {
             <Stack.Screen name="puertascasa" component={PuertasCasa} />
             <Stack.Screen name="detallescasa" component={DetallesHome} />
             <Stack.Screen name="perfil" component={ScreenUser} />
+            <Stack.Screen name="usuarios" component={ScreenUsuarios} />
         </Stack.Navigator>
     )
 }
@@ -72,7 +75,11 @@ function MyDrawer() {
                 title: 'Perfil', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="user" size={size} color={color} />
                 )
             }} />
-            <Drawer.Screen name="setting" component={ScreenSetting} options={{
+            <Drawer.Screen name="setting" component={ScreenUsuarios} options={{
+                title: 'Usuarios', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="users" size={size} color={color} />
+                )
+            }} />
+            <Drawer.Screen name="usuarios" component={ScreenSetting} options={{
                 title: 'Configuraciones', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<AntDesign name="setting" size={size} color={color} />
                 )
             }} />
@@ -92,6 +99,26 @@ function MyTabs() {
                     title: 'dashboard',
                     headerShown: false,
                     tabBarIcon: ({ color, size }) => (<FontAwesome name="home" size={size} color={color} />),
+                    tabBarLabelPosition: 'beside-icon',
+                    tabBarBadge: 10,
+                    tabBarBadgeStyle: {
+                        color: 'white',
+                        backgroundColor: 'rgb(255, 213, 0)'
+                    },
+                    tabBarActiveTintColor: 'black',
+                    tabBarInactiveTintColor: 'rgba(99, 99, 99, 0.91)',
+                    tabBarActiveBackgroundColor: 'rgba(180, 180, 177, 0.16)',
+                    tabBarStyle: { position: 'absolute' },
+                }}
+            />
+
+                        <Tab.Screen
+                name="users"
+                component={ScreenUsuarios}
+                options={{
+                    title: 'Usuarios',
+                    headerShown: false,
+                    tabBarIcon: ({ color, size }) => (<FontAwesome name="user" size={size} color={color} />),
                     tabBarLabelPosition: 'beside-icon',
                     tabBarBadge: 10,
                     tabBarBadgeStyle: {

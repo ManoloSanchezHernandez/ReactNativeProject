@@ -237,7 +237,7 @@ async function agregarPuertas(tabla, data) {
 
 async function eliminar(tabla, data) {
     const [result] = await conexion.query(`DELETE FROM ?? WHERE id = ?`, [tabla, data.id]);
-    return result;
+    return [result];
 }
 
 async function login(tabla, data) {

@@ -18,13 +18,13 @@ export const estadoLoginGlobal = createContext();
 export default function App() {
   return (
     <StateDevices>
-          <StateLogin>
+      <StateLogin>
         <StateGlobal>
           <NavigationContainer>
             <Navegacion />
           </NavigationContainer>
         </StateGlobal>
-    </StateLogin>
+      </StateLogin>
     </StateDevices>
   );
 }
