@@ -4,51 +4,86 @@ import { Card, Text, Button, Icon, useTheme } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { estadoGlobal, estadoLoginGlobal } from '../../context/contextData';
 
-function CardControl({ icon, title, navigateTo }) {
-  const theme = useTheme();
+function CardControl({ icon, title, navigateTo, backgroundColor, fullWidth }) {
   const navigation = useNavigation();
 
   return (
-    <Card style={styles.card}>
-      <Card.Content style={styles.cardContent}>
-        <Icon source={icon} size={50} color={theme.colors.primary} />
-        <Button 
-          mode="contained-tonal"
-          icon={icon}
-          style={styles.button}
-          contentStyle={{ flexDirection: 'row-reverse' }}
-          onPress={() => navigation.navigate(navigateTo)}
-        >
-          {title}
-        </Button>
+    <Card
+      style={[
+        styles.cardMini,
+        { backgroundColor },
+        fullWidth && styles.cardFullWidth,
+      ]}
+      onPress={() => navigation.navigate(navigateTo)}
+    >
+      <Card.Content style={styles.cardContentMini}>
+        <Icon source={icon} size={48} color="#fff" />
+        <Text style={styles.cardTitle}>{title}</Text>
       </Card.Content>
     </Card>
   );
 }
 
 export default function ScreenHome() {
-  const theme = useTheme();
   const { sumar, restar, contador } = useContext(estadoGlobal);
   const { logout, isLogin } = useContext(estadoLoginGlobal);
+  const theme = useTheme();
 
   return (
     <ScrollView contentContainerStyle={[styles.body, { backgroundColor: theme.colors.background }]}>
-      <Text style={[styles.title, { color: theme.colors.primary }]}>Control del Hogar</Text>
+      <View style={styles.header}>
+        <Icon source="home-automation" size={30} color={theme.colors.primary} />
+        <Text style={[styles.title, { color: theme.colors.primary }]}>Control del Hogar</Text>
+      </View>
 
-      <CardControl icon="lightbulb-on" title="Control de Luces" navigateTo="lucescasa" />
-      <CardControl icon="door" title="Control de Puertas" navigateTo="puertascasa" />
-      <CardControl icon="account" title="Control del Usuarios" navigateTo="perfil" />
+      <View>
+        <View style={styles.cardGridRow}>
+          <CardControl
+            icon="lightbulb-on"
+            title="Luces"
+            navigateTo="lucescasa"
+            backgroundColor={theme.colors.primary}
+          />
+          <CardControl
+            icon="door"
+            title="Puertas"
+            navigateTo="puertascasa"
+            backgroundColor={theme.colors.primary}
+          />
+        </View>
 
-      <Card style={[styles.card, styles.counterCard]}>
-        <Card.Content>
-          <Text style={styles.counterText}>
-            Contador: <Text style={{ fontWeight: 'bold' }}>{contador}</Text>
-          </Text>
+        <View style={styles.cardGridFullWidth}>
+          <CardControl
+            icon="account"
+            title="Usuarios"
+            navigateTo="usuarios"
+            backgroundColor={theme.colors.primary}
+            fullWidth
+          />
+        </View>
+      </View>
+
+      <Card style={[styles.counterCard, { backgroundColor: theme.colors.surface }]}>
+        <Card.Content style={{ alignItems: 'center' }}>
+          <Text style={[styles.counterLabel, { color: theme.colors.text }]}>Contador</Text>
+          <Text style={[styles.counterValue, { color: theme.colors.text }]}>{contador}</Text>
           <View style={styles.counterActions}>
-            <Button mode="outlined" icon="plus" onPress={sumar} style={styles.counterButton}>
+            <Button
+              mode="contained"
+              icon="plus"
+              onPress={sumar}
+              style={[styles.counterButton, { backgroundColor: theme.colors.primary }]}
+              textColor="#fff"
+            >
               Sumar
             </Button>
-            <Button mode="outlined" icon="minus" onPress={restar} style={styles.counterButton}>
+            <Button
+              mode="contained"
+              icon="minus"
+              onPress={restar}
+              style={[styles.counterButton, { backgroundColor: theme.colors.secondary }]}
+              textColor="#fff"
+            >
               Restar
             </Button>
           </View>
@@ -62,6 +97,8 @@ export default function ScreenHome() {
           onPress={logout}
           style={styles.logoutButton}
           buttonColor={theme.colors.error}
+          textColor="#fff"
+          contentStyle={{ flexDirection: 'row-reverse' }}
         >
           Cerrar Sesión
         </Button>
@@ -76,45 +113,70 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 32,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 24,
-  },
-  card: {
-    marginBottom: 16,
-    borderRadius: 12,
-    elevation: 4,
-  },
-  cardContent: {
+  header: {
     alignItems: 'center',
-    padding: 20,
+    marginVertical: 20,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  cardGridRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  cardGridFullWidth: {
+    width: '100%',
+  },
+  cardMini: {
+    width: '48%',
+    borderRadius: 16,
+    elevation: 6,
+    marginBottom: 16,
+  },
+  cardFullWidth: {
+    width: '100%',
+  },
+  cardContentMini: {
+    alignItems: 'center',
+    paddingVertical: 24,
+  },
+  cardTitle: {
+    color: '#fff',
+    fontSize: 16,
+    marginTop: 12,
+    fontWeight: '600',
+    textAlign: 'center',
   },
   counterCard: {
     marginTop: 24,
-    padding: 16,
+    padding: 20,
+    borderRadius: 16,
+    elevation: 4,
   },
-  button: {
-    marginTop: 12,
-    borderRadius: 8,
-    width: '100%',
-  },
-  counterText: {
+  counterLabel: {
     fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 12,
+  },
+  counterValue: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginVertical: 8,
   },
   counterActions: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: 12,
   },
   counterButton: {
     flex: 1,
-    marginHorizontal: 4,
+    marginHorizontal: 6,
+    borderRadius: 8,
   },
   logoutButton: {
-    marginTop: 24,
+    marginTop: 32,
     borderRadius: 8,
+    paddingVertical: 6,
   },
 });

@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { Card, Text, Button, Icon, Switch, ActivityIndicator } from 'react-native-paper';
+import { Card, Text, Button, Icon, Switch, ActivityIndicator, useTheme } from 'react-native-paper';
 import { devicesGlobal } from '../../context/contextData';
+
+
 
 export default function LucesCasa() {
   const IP = process.env.EXPO_PUBLIC_IP;
+  const theme = useTheme();
 
   const {
     estadoLuces,
@@ -89,13 +92,14 @@ export default function LucesCasa() {
           <Card.Content style={estilos.contenidoTarjeta}>
             <Icon
               source="lightbulb"
-              color={obtenerEstadoLuz(id) ? "gold" : "gray"}
+              color={obtenerEstadoLuz(id) ? theme.colors.active : theme.colors.inactive}
               size={30}
             />
             <Text style={estilos.nombreLuz}>{nombresLuces[id]}</Text>
             <Switch
               value={obtenerEstadoLuz(id)}
               onValueChange={() => cambiarEstadoLuz(id)}
+              
             />
           </Card.Content>
         </Card>

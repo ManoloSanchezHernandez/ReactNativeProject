@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 
 export default function StateLogin({ children }) {
     const [dataUser, setdataUser] = useState([]);  // cambio importante
-    const [isLogin, setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState(true                                                                                                                                                                                            );
 
     const login = () => setIsLogin(true);
     const logout = () => setIsLogin(false);

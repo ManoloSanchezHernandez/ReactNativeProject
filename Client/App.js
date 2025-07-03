@@ -8,7 +8,8 @@ import StateGlobal from './src/context/StateGlobal';
 import StateLogin from './src/context/StateLogin';
 import StateDevices from './src/context/StateDevices';
 import { createContext } from 'react';
-
+import { PaperProvider } from 'react-native-paper';
+import { AppTheme } from './themes'
 
 export const estadoLoginGlobal = createContext();
 
@@ -17,22 +18,18 @@ export const estadoLoginGlobal = createContext();
 
 export default function App() {
   return (
-    <StateDevices>
-      <StateLogin>
-        <StateGlobal>
-          <NavigationContainer>
-            <Navegacion />
-          </NavigationContainer>
-        </StateGlobal>
-      </StateLogin>
-    </StateDevices>
+    <PaperProvider theme={AppTheme}>
+      <StateDevices>
+        <StateLogin>
+          <StateGlobal>
+            <NavigationContainer>
+              <Navegacion />
+            </NavigationContainer>
+          </StateGlobal>
+        </StateLogin>
+      </StateDevices>
+    </PaperProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(51, 56, 57, 1)', // Color de fondo
-    // para evitar que se sobreponga con la barra de estado (opcional)
-  },
-});
+

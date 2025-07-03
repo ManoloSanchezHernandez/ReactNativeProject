@@ -16,7 +16,6 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import ScreenNotificaciones from "./src/screen/Notificaciones/ScreenNotificaciones";
 import ScreenHome from "./src/screen/home/ScreenHome";
 import ScreenSetting from "./src/screen/setting/ScreenSetting";
-import ScreenUser from "./src/screen/Users/ScreenUser";
 import ScreenUsuarios from "./src/screen/Usuarios/ScreenUsuarios";
 
 //llamara a hijos de Home
@@ -43,7 +42,6 @@ function MyStackHome() {
             <Stack.Screen name="lucescasa" component={LucesCasa} />
             <Stack.Screen name="puertascasa" component={PuertasCasa} />
             <Stack.Screen name="detallescasa" component={DetallesHome} />
-            <Stack.Screen name="perfil" component={ScreenUser} />
             <Stack.Screen name="usuarios" component={ScreenUsuarios} />
         </Stack.Navigator>
     )
@@ -64,15 +62,11 @@ function MyDrawer() {
     return (
         <Drawer.Navigator>
             <Drawer.Screen name="Menu" component={MyStackHome} options={{
-                title: 'Dahsboard', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="dashboard" size={size} color={color} />
+                title: 'Home', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="dashboard" size={size} color={color} />
                 )
             }} />
             <Drawer.Screen name="notificaciones" component={ScreenNotificaciones} options={{
                 title: 'Notificaciones', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="comment" size={size} color={color} />
-                )
-            }} />
-            <Drawer.Screen name="perfil" component={ScreenUser} options={{
-                title: 'Perfil', drawerPosition: 'right', drawerIcon: ({ color, size }) => (<FontAwesome name="user" size={size} color={color} />
                 )
             }} />
             <Drawer.Screen name="setting" component={ScreenUsuarios} options={{
