@@ -1,14 +1,23 @@
 {
   "expo": {
+    "name": "ReactApk",
+    "slug": "harto",
+    "version": "1.0.0",
+    "sdkVersion": "53.0.0",
+    "orientation": "portrait",
+    "platforms": [
+      "android"
+    ],
+    "android": {
+      "package": "com.manolomanolin1000.project",
+      "versionCode": 1,
+      "permissions": []
+    },
     "extra": {
       "eas": {
-        "projectId": "b342699b-d726-4e69-8614-785ac46f18df"
+        "projectId": "052a0d20-037b-4d81-ae67-a9499cccd394"
       }
     },
-    "owner": "manolomanolin1000",
-    "slug": "project",
-    "android": {
-      "package": "com.manolomanolin1000.project"
-    }
+    "owner": "manolomanolin1000"
   }
 }
