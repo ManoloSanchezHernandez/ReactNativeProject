@@ -2,7 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from './node_modules/@react-navigation/native/lib/typescript/src';
 import Navegacion from './Navegacion';
 import StateGlobal from './src/context/StateGlobal';
 import StateLogin from './src/context/StateLogin';

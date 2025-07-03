@@ -253,8 +253,8 @@ async function login(tabla, data) {
             return { status: false, mensaje: 'Usuario no encontrado' };
         }
 
-        const usuarioBD = rows[0];
-        const coincide = await bcrypt.compare(password, usuarioBD.pw);
+                                                const usuarioBD = rows[0];
+                                                const coincide = await bcrypt.compare(password, usuarioBD.pw);
 
         if (coincide) {
             return { status: true, user: usuarioBD };

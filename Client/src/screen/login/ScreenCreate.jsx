@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import React, { useState, useContext } from 'react';
 import { Button, TextInput, Card } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '../../../node_modules/@react-navigation/native/lib/typescript/src';
 import { estadoLoginGlobal } from '../../context/contextData';
 
 export default function ScreenCreate() {

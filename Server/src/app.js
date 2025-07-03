@@ -13,7 +13,7 @@ app.use(express.json());
 //Configuracion
 app.set('port', config.app.port);
 
-//Permitir conexion externo 
+//Permitir conexion externo     
 app.use(cors());
 
 //Rutas

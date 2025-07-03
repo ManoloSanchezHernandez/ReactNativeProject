@@ -1,7 +1,7 @@
 import { Alert, StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { Button, TextInput, Card } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '../../../node_modules/@react-navigation/native/lib/typescript/src';
 import { estadoLoginGlobal } from '../../context/contextData'; // Importa el contexto de login
 import { useContext } from 'react'; // Importa useContext para acceder al contexto
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Card, Text, Button, Icon, useTheme } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '../../../node_modules/@react-navigation/native/lib/typescript/src';
 import { estadoGlobal, estadoLoginGlobal } from '../../context/contextData';
 
 function CardControl({ icon, title, navigateTo, backgroundColor, fullWidth }) {

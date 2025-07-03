@@ -1,7 +1,12 @@
 {
   "expo": {
-    "name": "Blank",
-    "slug": "Blank",
-    "version": "1.0.0"
+    "extra": {
+      "eas": {
+        "projectId": "f3792a3e-1809-4bbd-ba2b-118dcdf848d4"
+      }
+    },
+    "android": {
+      "package": "com.manolomanolin1000.blank"
+    }
   }
 }

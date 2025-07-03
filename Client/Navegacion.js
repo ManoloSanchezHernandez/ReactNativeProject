@@ -3,9 +3,9 @@ import React, { useContext } from "react";
 import { Text } from 'react-native';
 
 //importamos las navegaciones que vamos a usar
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "./node_modules/@react-navigation/stack/lib/typescript/src";
+import { createBottomTabNavigator } from "./node_modules/@react-navigation/bottom-tabs/lib/typescript/src";
+import { createDrawerNavigator } from "./node_modules/@react-navigation/drawer/lib/typescript/src";
 
 //importamos los iconos que vamos a usar
 import FontAwesome from '@expo/vector-icons/FontAwesome';
