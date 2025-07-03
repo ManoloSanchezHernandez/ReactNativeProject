@@ -2,11 +2,13 @@
   "expo": {
     "extra": {
       "eas": {
-        "projectId": "f3792a3e-1809-4bbd-ba2b-118dcdf848d4"
+        "projectId": "b342699b-d726-4e69-8614-785ac46f18df"
       }
     },
+    "owner": "manolomanolin1000",
+    "slug": "project",
     "android": {
-      "package": "com.manolomanolin1000.blank"
+      "package": "com.manolomanolin1000.project"
     }
   }
 }

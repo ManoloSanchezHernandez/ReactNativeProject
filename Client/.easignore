@@ -1,0 +1,8 @@
+.expo
+.vscode
+.env
+estructura.txt
+node_modules
+.git
+.gitignore
+.gitattributes
