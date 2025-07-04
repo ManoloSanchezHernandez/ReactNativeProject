@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ReactApk",
-    "slug": "gestorpuertas",
+    "name": "Blank",
+    "slug": "blank",
     "version": "1.0.0",
     "sdkVersion": "53.0.0",
     "orientation": "portrait",
@@ -9,15 +9,10 @@
       "android"
     ],
     "android": {
-      "package": "com.manuelmqnuel2005.project",
       "versionCode": 1,
       "permissions": []
     },
     "extra": {
-      "eas": {
-        "projectId": "be49382f-8129-485e-a904-80b76e8bf81a"
-      }
-    },
-    "owner": "manuelmqnuel2005"
+    }
   }
 }
