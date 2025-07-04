@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ReactApk",
-    "slug": "harto",
+    "slug": "gestorpuertas",
     "version": "1.0.0",
     "sdkVersion": "53.0.0",
     "orientation": "portrait",
@@ -9,15 +9,15 @@
       "android"
     ],
     "android": {
-      "package": "com.manolomanolin1000.project",
+      "package": "com.manuelmqnuel2005.project",
       "versionCode": 1,
       "permissions": []
     },
     "extra": {
       "eas": {
-        "projectId": "052a0d20-037b-4d81-ae67-a9499cccd394"
+        "projectId": "be49382f-8129-485e-a904-80b76e8bf81a"
       }
     },
-    "owner": "manolomanolin1000"
+    "owner": "manuelmqnuel2005"
   }
 }
